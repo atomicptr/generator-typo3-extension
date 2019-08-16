@@ -131,9 +131,10 @@ module.exports = class extends Generator {
             templateVariables
         );
         // Configuration/TSconfig
-        this.fs.copy(
-            this.templatePath("Configuration/TSconfig/_pagets.tsconfig"),
-            path.join(configurationDir, "TSconfig", "pagets.tsconfig"),
+        this.fs.copyTpl(
+            this.templatePath("Configuration/TSconfig/_wizard.tsconfig"),
+            path.join(configurationDir, "TSconfig", "wizard.tsconfig"),
+            templateVariables
         );
         // Configuration/TypoScript
         this.fs.copyTpl(
@@ -152,6 +153,11 @@ module.exports = class extends Generator {
         this.fs.copyTpl(
             this.templatePath("Resources/Private/Language/_locallang_module.xlf"),
             path.join(privateResourcesDir, "Language", "locallang_module.xlf"),
+            templateVariables
+        );
+        this.fs.copyTpl(
+            this.templatePath("Resources/Private/Language/_locallang_plugins.xlf"),
+            path.join(privateResourcesDir, "Language", "locallang_plugins.xlf"),
             templateVariables
         );
         // Resources/Private/Layouts

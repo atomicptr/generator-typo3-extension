@@ -12,7 +12,7 @@ call_user_func(function ($extKey) {
 
     // Add pageTS
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig(
-        "<INCLUDE_TYPOSCRIPT: source=\"FILE:EXT:$extKey/Configuration/TSconfig/pagets.tsconfig\">"
+        "<INCLUDE_TYPOSCRIPT: source=\"DIR:EXT:$extKey/Configuration/TSconfig\">"
     );
 
     $iconRegistry = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Imaging\IconRegistry::class);

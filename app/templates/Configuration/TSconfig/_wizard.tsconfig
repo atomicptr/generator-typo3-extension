@@ -1,0 +1,11 @@
+mod.wizards.newContentElement.wizardItems.plugins.elements {
+    <%= extensionKeyCondensed %>_exampleplugin {
+        iconIdentifier = <%= extensionKeyCondensed %>-icon
+        title = LLL:EXT:<%= extensionKey %>/Resources/Private/Language/locallang_plugins.xlf:exampleplugin.title
+        description = LLL:EXT:<%= extensionKey %>/Resources/Private/Language/locallang_plugins.xlf:exampleplugin.description
+        tt_content_defValues {
+            CType = list
+            list_type = <%= extensionKeyCondensed %>_exampleplugin
+        }
+    }
+}

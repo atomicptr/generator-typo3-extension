@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+    <file source-language="en" datatype="plaintext" original="messages" product-name="<%= extensionKey %>">
+        <header/>
+        <body>
+            <trans-unit id="exampleplugin.title">
+                <source>Example Plugin</source>
+            </trans-unit>
+            <trans-unit id="exampleplugin.description">
+                <source>This is an example plugin!</source>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>
