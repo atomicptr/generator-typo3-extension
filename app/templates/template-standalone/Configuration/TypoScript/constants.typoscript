@@ -1,0 +1,13 @@
+resPublic = EXT:<%= extensionKey %>/Resources/Public
+resPrivate = EXT:<%= extensionKey %>/Resources/Private
+
+androidThemeColor = #563d7c
+bootstrapVersion = 4.3.1
+
+plugin.tx_<%= extensionKeyCondensed %> {
+    # customsubcategory=settings=Settings
+    settings {
+        # cat=plugin.tx_<%= extensionKeyCondensed %>/view; type=int+; label=Navigation Page UID
+        navigation_directory =
+    }
+}

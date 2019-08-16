@@ -1,0 +1,126 @@
+tt_content.gridelements_pi1.20.10.setup {
+    section < lib.gridelements.defaultGridSetup
+    section {
+        wrap >
+        dataWrap = <section id="c{field:uid}">|</section>
+    }
+
+    2cols < lib.gridelements.defaultGridSetup
+    2cols {
+        wrap >
+        dataWrap = <div id="c{field:uid}" class="row">|</div>
+        columns {
+            101 < .default
+            101.dataWrap = <div class="{field:flexform_xl.column1} {field:flexform_md.column1} {field:flexform_sm.column1}">|</div>
+            101.wrap >
+
+            102 < .101
+            102.dataWrap = <div class="{field:flexform_xl.column2} {field:flexform_md.column2} {field:flexform_sm.column2}">|</div>
+        }
+    }
+
+    3cols < .2cols
+    3cols.columns {
+        103 < .101
+        103.dataWrap = <div class="{field:flexform_xl.column3} {field:flexform_md.column3} {field:flexform_sm.column3}">|</div>
+    }
+
+    4cols < .3cols
+    4cols.columns {
+        104 < .101
+        104.dataWrap = <div class="{field:flexform_xl.column4} {field:flexform_md.column4} {field:flexform_sm.column4}">|</div>
+    }
+
+    flexcols < .2cols
+    flexcols {
+        columns {
+            101 < .default
+            101.renderObj.wrap = <div class="col">|</div>
+        }
+    }
+
+    accordion < lib.gridelements.defaultGridSetup
+    accordion {
+        outerWrap = <div class="accordion" id="accordion-{field:uid}">|</div>
+        outerWrap.insertData = 1
+
+        columns {
+            101 < .default
+            101 {
+                renderObj {
+                    5 = LOAD_REGISTER
+                    5 {
+                        COUNTER.cObject = TEXT
+                        COUNTER.cObject.data = register:COUNTER
+                        COUNTER.cObject.wrap = |+1
+                        COUNTER.prioriCalc = intval
+                    }
+
+                    10 = TEXT
+                    10 {
+                        field = header
+
+                        wrap (
+                            <div class="card">
+                                <div class="card-header" id="accordion-card-{field:uid}">
+                                    <h5 class="mb-0">
+                                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#accordion-collapse-{field:uid}">
+                                            |
+                                        </button>
+                                    </h5>
+                                </div>
+                                <div id="accordion-collapse-{field:uid}" class="collapse" data-parent="#accordion-{field:tx_gridelements_container}">
+                                    <div class="card-body">
+                        )
+
+                        wrap.override (
+                            <div class="card">
+                                <div class="card-header" id="accordion-card-{field:uid}">
+                                    <h5 class="mb-0">
+                                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#accordion-collapse-{field:uid}">
+                                            |
+                                        </button>
+                                    </h5>
+                                </div>
+                                <div id="accordion-collapse-{field:uid}" class="collapse show" data-parent="#accordion-{field:tx_gridelements_container}">
+                                    <div class="card-body">
+                        )
+
+                        wrap.override {
+                            if.value = 1
+                            if.equals.data = register:COUNTER
+                        }
+
+                        insertData = 1
+                    }
+
+                    20 < tt_content
+                    20 {
+                        text.10 >
+                        image.10 >
+                        textpic.10 >
+                        uploads.10 >
+                        table.10 >
+                        multimedia.10 >
+                        media.10 >
+                        menu.10 >
+                    }
+
+                    30 = TEXT
+                    30.wrap = |</div></div></div>
+                }
+            }
+        }
+
+        append = COA
+        append {
+            5 = LOAD_REGISTER
+            5 {
+                COUNTER.cObject = TEXT
+                COUNTER.cObject.data = register:COUNTER
+                COUNTER.cObject.wrap = |*0
+                COUNTER.prioriCalc = intval
+            }
+        }
+    }
+}

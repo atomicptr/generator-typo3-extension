@@ -1,0 +1,23 @@
+# To use Page > Resources > Media as Background Image
+# Useage:
+#   <div
+#     style="background-image: url('{f:cObject(typoscriptObjectPath: 'lib.headerImage')}');">
+#       <!-- content -->
+#   </div>
+
+lib {
+    headerImage = FILES
+    headerImage {
+        references {
+            data = levelmedia:-1, slide
+        }
+        renderObj = IMG_RESOURCE
+        renderObj {
+            file {
+                import.data = file:current:uid
+                treatIdAsReference = 1
+            }
+            altText.data = file:current:title
+        }
+    }
+}

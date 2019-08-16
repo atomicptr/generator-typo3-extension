@@ -40,6 +40,27 @@ module.exports = class extends Generator {
                 message: "What is your email?",
                 default: this.user.git.email,
                 validate: value => (/^.+\@.+\..+$/g).test(value)
+            },
+            {
+                type: "list",
+                name: "extensionType",
+                message: "Which type of extension to you want to generate?",
+                choices: [
+                    {
+                        name: "Standard TYPO3 Extension, with Controllers, Plugins, etc.",
+                        value: "standard"
+                    },
+                    {
+                        name: "Template Extension, standalone",
+                        value: "template-standalone"
+                    },
+                    /* Coming soon...
+                    {
+                        name: "Template Extension, based on bootstrap_package",
+                        value: "template-bootstrap"
+                    }*/
+                ],
+                store: true
             }
         ]);
     }
@@ -51,14 +72,19 @@ module.exports = class extends Generator {
             vendorName,
             extensionKey,
             authorName,
-            authorEmail
+            authorEmail,
+            extensionType
         } = this.answers;
 
         const rootDir = this.destinationPath(extensionKey);
-        const classesDir = path.join(rootDir, "Classes");
-        const configurationDir = path.join(rootDir, "Configuration");
-        const privateResourcesDir = path.join(rootDir, "Resources", "Private");
-        const testsDir = path.join(rootDir, "Tests", "Unit");
+
+        const dirs = {
+            root: rootDir,
+            classes: path.join(rootDir, "Classes"),
+            configuration: path.join(rootDir, "Configuration"),
+            resources: path.join(rootDir, "Resources"),
+            tests: path.join(rootDir, "Tests", "Unit")
+        };
 
         const phpVendorName = NameUtility.generateUpperCamelCaseName(vendorName);
         const phpExtensionName = NameUtility.generateUpperCamelCaseName(extensionKey);
@@ -75,116 +101,115 @@ module.exports = class extends Generator {
             phpExtensionName
         };
 
+        this._copyResources(extensionType, dirs, templateVariables);
+    }
+
+    _copyResources(extensionType, dirs, templateVariables) {
+        // copy content
+        this.fs.copy(
+            this.templatePath("shared/_.gitignore"),
+            path.join(dirs.root, ".gitignore"),
+        );
+
+        this.fs.copy(
+            this.templatePath("shared/typoscript-lint.yml"),
+            path.join(dirs.root, "typoscript-lint.yml"),
+        );
+
+        this.fs.copy(
+            this.templatePath("shared/ext_icon.svg"),
+            path.join(dirs.root, "ext_icon.svg"),
+        );
+
+        this.fs.copyTpl(
+            this.templatePath("shared/README.md"),
+            path.join(dirs.root, "README.md"),
+            templateVariables
+        );
+
+        if (extensionType === "standard") {
+            this._copyResourcesForStandardExtension(dirs, templateVariables);
+        } else if (extensionType === "template-standalone") {
+            this._copyResourcesForStandaloneTemplateExtension(dirs, templateVariables);
+        } else if (extensionType === "template-bootstrap") {
+            this._copyResourcesForBootstrapPackagePoweredTemplateExtension(dirs, templateVariables);
+        }
+    }
+
+    _copyResourcesForStandardExtension(dirs, templateVariables) {
         // Root Dir
-        this.fs.copy(
-            this.templatePath("_.gitignore"),
-            path.join(rootDir, ".gitignore"),
+        this.fs.copyTpl(
+            this.templatePath("shared/ext_emconf.php"),
+            path.join(dirs.root, "ext_emconf.php"),
+            {...templateVariables, extensionCategory: "misc"}
         );
         this.fs.copyTpl(
-            this.templatePath("_composer.json"),
-            path.join(rootDir, "composer.json"),
+            this.templatePath("standard/composer.json"),
+            path.join(dirs.root, "composer.json"),
             templateVariables
         );
         this.fs.copyTpl(
-            this.templatePath("_ext_emconf.php"),
-            path.join(rootDir, "ext_emconf.php"),
+            this.templatePath("standard/ext_localconf.php"),
+            path.join(dirs.root, "ext_localconf.php"),
             templateVariables
         );
         this.fs.copyTpl(
-            this.templatePath("_ext_localconf.php"),
-            path.join(rootDir, "ext_localconf.php"),
+            this.templatePath("standard/ext_tables.php"),
+            path.join(dirs.root, "ext_tables.php"),
             templateVariables
         );
         this.fs.copyTpl(
-            this.templatePath("_ext_tables.php"),
-            path.join(rootDir, "ext_tables.php"),
+            this.templatePath("standard/Classes"),
+            dirs.classes,
             templateVariables
         );
         this.fs.copyTpl(
-            this.templatePath("_README.md"),
-            path.join(rootDir, "README.md"),
+            this.templatePath("standard/Configuration"),
+            dirs.configuration,
             templateVariables
         );
-        this.fs.copy(
-            this.templatePath("_typoscript-lint.yml"),
-            path.join(rootDir, "typoscript-lint.yml"),
+        this.fs.copyTpl(
+            this.templatePath("standard/Resources"),
+            dirs.resources,
+            templateVariables
         );
+        this.fs.copyTpl(
+            this.templatePath("standard/Tests"),
+            path.join(dirs.tests),
+            templateVariables
+        );
+    }
 
-        // Classes
-        // Classes/Controller
+    _copyResourcesForStandaloneTemplateExtension(dirs, templateVariables) {
         this.fs.copyTpl(
-            this.templatePath("Classes/Controller/_ExampleController.php"),
-            path.join(classesDir, "Controller", "ExampleController.php"),
+            this.templatePath("shared/ext_emconf.php"),
+            path.join(dirs.root, "ext_emconf.php"),
+            {...templateVariables, extensionCategory: "template"}
+        );
+        this.fs.copyTpl(
+            this.templatePath("template-standalone/composer.json"),
+            path.join(dirs.root, "composer.json"),
             templateVariables
         );
         this.fs.copyTpl(
-            this.templatePath("Classes/Controller/_ExampleBackendController.php"),
-            path.join(classesDir, "Controller", "ExampleBackendController.php"),
+            this.templatePath("template-standalone/ext_localconf.php"),
+            path.join(dirs.root, "ext_localconf.php"),
             templateVariables
         );
+        this.fs.copyTpl(
+            this.templatePath("template-standalone/Configuration"),
+            dirs.configuration,
+            templateVariables
+        );
+        this.fs.copyTpl(
+            this.templatePath("template-standalone/Resources"),
+            dirs.resources,
+            templateVariables
+        );
+    }
 
-        // Configuration
-        // Configuration/TCA/Overrides
-        this.fs.copyTpl(
-            this.templatePath("Configuration/TCA/Overrides/_pages.php"),
-            path.join(configurationDir, "TCA", "Overrides","pages.php"),
-            templateVariables
-        );
-        // Configuration/TSconfig
-        this.fs.copyTpl(
-            this.templatePath("Configuration/TSconfig/_wizard.tsconfig"),
-            path.join(configurationDir, "TSconfig", "wizard.tsconfig"),
-            templateVariables
-        );
-        // Configuration/TypoScript
-        this.fs.copyTpl(
-            this.templatePath("Configuration/TypoScript/_setup.typoscript"),
-            path.join(configurationDir, "TypoScript", "setup.typoscript"),
-            templateVariables
-        );
-        this.fs.copyTpl(
-            this.templatePath("Configuration/TypoScript/_constants.typoscript"),
-            path.join(configurationDir, "TypoScript", "constants.typoscript"),
-            templateVariables
-        );
-
-        // Resources
-        // Resources/Language
-        this.fs.copyTpl(
-            this.templatePath("Resources/Private/Language/_locallang_module.xlf"),
-            path.join(privateResourcesDir, "Language", "locallang_module.xlf"),
-            templateVariables
-        );
-        this.fs.copyTpl(
-            this.templatePath("Resources/Private/Language/_locallang_plugins.xlf"),
-            path.join(privateResourcesDir, "Language", "locallang_plugins.xlf"),
-            templateVariables
-        );
-        // Resources/Private/Layouts
-        this.fs.copy(
-            this.templatePath("Resources/Private/Layouts/_Backend.html"),
-            path.join(privateResourcesDir, "Layouts", "Backend.html")
-        );
-        this.fs.copy(
-            this.templatePath("Resources/Private/Layouts/_Default.html"),
-            path.join(privateResourcesDir, "Layouts", "Default.html")
-        );
-        // Resources/Private/Templates
-        this.fs.copy(
-            this.templatePath("Resources/Private/Templates/Example/_List.html"),
-            path.join(privateResourcesDir, "Templates", "Example", "List.html")
-        );
-        this.fs.copy(
-            this.templatePath("Resources/Private/Templates/ExampleBackend/_List.html"),
-            path.join(privateResourcesDir, "Templates", "ExampleBackend", "List.html")
-        );
-
-        // Tests
-        // Tests/Unit/Controller
-        this.fs.copyTpl(
-            this.templatePath("Tests/Unit/Controller/_ExampleControllerTest.php"),
-            path.join(testsDir, "Controller", "ExampleControllerTest.php"),
-            templateVariables
-        );
+    _copyResourcesForBootstrapPackagePoweredTemplateExtension(dirs, templateVariables) {
+        this.log("FATAL NOT YET IMPLEMENTED")
+        process.exit(1);
     }
 }

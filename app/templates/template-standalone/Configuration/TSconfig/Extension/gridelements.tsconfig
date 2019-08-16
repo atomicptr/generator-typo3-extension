@@ -1,0 +1,143 @@
+lib.gridelements.defaultGridSetup.columns.2 >
+
+tx_gridelements.setup {
+    section {
+        title = Section
+        description = Section
+        iconIdentifier = <%= extensionKeyCondensed %>-grid-section
+        frame = 1
+        topLevelLayout = 0
+        config {
+            colCount = 1
+            rowCount = 1
+            rows.1 {
+                columns.1 {
+                    name = Content
+                    colPos = 101
+                }
+            }
+        }
+
+        flexformDS = FILE:EXT:<%= extensionKey %>/Configuration/FlexForms/gridelements_section.xml
+    }
+
+    2cols {
+        title = 2 Columns
+        description = 2 columns
+        iconIdentifier = <%= extensionKeyCondensed %>-grid-2cols
+        frame = 3
+        topLevelLayout = 0
+        config {
+            colCount = 2
+            rowCount = 1
+            rows.1 {
+                columns.1 {
+                    name = Left Column
+                    colPos = 101
+                }
+                columns.2 {
+                    name = Right Column
+                    colPos = 102
+                }
+            }
+        }
+
+        flexformDS = FILE:EXT:<%= extensionKey %>/Configuration/FlexForms/gridelements_2cols.xml
+    }
+
+    3cols {
+        title = 3 Columns
+        description = 3 columns
+        iconIdentifier = <%= extensionKeyCondensed %>-grid-3cols
+        frame = 3
+        topLevelLayout = 0
+        config {
+            colCount = 3
+            rowCount = 1
+            rows.1 {
+                columns.1 {
+                    name = Left Column
+                    colPos = 101
+                }
+                columns.2 {
+                    name = Center Column
+                    colPos = 103
+                }
+                columns.3 {
+                    name = Right Column
+                    colPos = 102
+                }
+            }
+        }
+
+        flexformDS = FILE:EXT:<%= extensionKey %>/Configuration/FlexForms/gridelements_3cols.xml
+    }
+
+    4cols {
+        title = 4 Columns
+        description = 4 columns
+        iconIdentifier = <%= extensionKeyCondensed %>-grid-4cols
+        frame = 3
+        topLevelLayout = 0
+        config {
+            colCount = 4
+            rowCount = 1
+            rows.1 {
+                columns.1 {
+                    name = Column 1
+                    colPos = 101
+                }
+                columns.2 {
+                    name = Column 2
+                    colPos = 102
+                }
+                columns.3 {
+                    name = Column 3
+                    colPos = 103
+                }
+                columns.4 {
+                    name = Column 4
+                    colPos = 104
+                }
+            }
+        }
+
+        flexformDS = FILE:EXT:<%= extensionKey %>/Configuration/FlexForms/gridelements_4cols.xml
+    }
+
+    flexcols {
+        title = Flex Columns
+        description = Blah columns
+        iconIdentifier = <%= extensionKeyCondensed %>-grid-flexcols
+        frame = 2
+        topLevelLayout = 0
+        config {
+            colCount = 1
+            rowCount = 1
+            rows.1 {
+                columns.1 {
+                    name = Columns
+                    colPos = 101
+                }
+            }
+        }
+    }
+
+    accordion {
+        title = Accordion
+        description = Accordion
+        iconIdentifier = <%= extensionKeyCondensed %>-grid-accordion
+        frame = 2
+        topLevelLayout = 0
+        config {
+            colCount = 1
+            rowCount = 1
+            rows.1 {
+                columns.1 {
+                    name = Accordion Items
+                    colPos = 101
+                }
+            }
+        }
+    }
+}

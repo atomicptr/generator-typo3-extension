@@ -1,0 +1,120 @@
+mod.web_layout.BackendLayouts {
+    Index {
+        title = Index Page
+        icon = EXT:<%= extensionKey %>/Resources/Public/Images/Icons/pagelayouts/IndexPage.png
+        config {
+            backend_layout {
+                colCount = 1
+                rowCount = 1
+                rows {
+                    1 {
+                        columns {
+                            1 {
+                                name = Content
+                                colPos = 0
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    SubPage6633 {
+        title = Sub Page 66/33
+        icon = EXT:<%= extensionKey %>/Resources/Public/Images/Icons/pagelayouts/SubPage6633.png
+        config {
+            backend_layout {
+                colCount = 2
+                rowCount = 1
+                rows {
+                    1 {
+                        columns {
+                            1 {
+                                name = Content
+                                colspan = 2
+                                colPos = 0
+                            }
+                            2 {
+                                name = Sidebar
+                                colPos = 11
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    SubPage3366 {
+        title = Sub Page 33/66
+        icon = EXT:<%= extensionKey %>/Resources/Public/Images/Icons/pagelayouts/SubPage3366.png
+        config {
+            backend_layout {
+                colCount = 2
+                rowCount = 1
+                rows {
+                    1 {
+                        columns {
+                            1 {
+                                name = Sidebar
+                                colPos = 10
+                            }
+                            2 {
+                                name = Content
+                                colspan = 2
+                                colPos = 0
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    SubPage5050 {
+        title = Sub Page 50/50
+        icon = EXT:<%= extensionKey %>/Resources/Public/Images/Icons/pagelayouts/SubPage5050.png
+        config {
+            backend_layout {
+                colCount = 2
+                rowCount = 1
+                rows {
+                    1 {
+                        columns {
+                            1 {
+                                name = Content Left
+                                colPos = 10
+                            }
+                            2 {
+                                name = Content Right
+                                colPos = 11
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    SubPage100 {
+        title = Sub Page 100
+        icon = EXT:<%= extensionKey %>/Resources/Public/Images/Icons/pagelayouts/SubPage100.png
+        config {
+            backend_layout {
+                colCount = 1
+                rowCount = 1
+                rows {
+                    1 {
+                        columns {
+                            1 {
+                                name = Content
+                                colPos = 0
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

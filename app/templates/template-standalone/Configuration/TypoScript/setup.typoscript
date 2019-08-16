@@ -1,0 +1,10 @@
+plugin.tx_<%= extensionKeyCondensed %> {
+    view {
+        templateRootPaths.10 = {$resPrivate}/Templates/
+        partialRootPaths.10 = {$resPrivate}/Partials/
+        layoutRootPaths.10 = {$resPrivate}/Layouts/
+    }
+}
+
+<INCLUDE_TYPOSCRIPT: source="DIR:EXT:<%= extensionKey %>/Configuration/TypoScript/Page">
+<INCLUDE_TYPOSCRIPT: source="DIR:EXT:<%= extensionKey %>/Configuration/TypoScript/Extension">

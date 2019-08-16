@@ -1,0 +1,16 @@
+lib {
+    content = CONTENT
+    content {
+        table = tt_content
+        select {
+            orderBy = sorting
+            where = colPos=0
+        }
+    }
+
+    contentRight < .content
+    contentRight.select.where = colPos=11
+
+    contentLeft < .content
+    contentLeft.select.where = colPos=10
+}

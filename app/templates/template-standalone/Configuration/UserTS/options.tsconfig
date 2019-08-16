@@ -1,0 +1,4 @@
+options {
+    # enable "Duplicate" button
+    showDuplicate = 1
+}

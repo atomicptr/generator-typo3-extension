@@ -1,0 +1,84 @@
+# include all helper functions
+<INCLUDE_TYPOSCRIPT: source="DIR:EXT:<%= extensionKey %>/Configuration/TypoScript/Page/Helpers">
+
+page = PAGE
+page {
+    typeNum = 0
+
+    shortcutIcon = {$resPublic}/Images/favicon.ico
+
+    meta {
+        X-UA-Compatible = IE=edge
+        HandheldFriendly = True
+        viewport = width=device-width,initial-scale=1,maximum-scale=1
+
+        revisit-after = 7 days
+
+        description.field = description
+
+        keywords {
+            data = DB:pages:1:keywords
+            override.field = keywords
+        }
+
+        rating = general
+
+        ### MOBILE META TAGS ###
+
+        # Android
+        theme-color = {$androidThemeColor}
+
+        # Apple
+        apple-mobile-web-app-capable = yes
+        apple-mobile-web-app-status-bar-style = black
+    }
+
+    includeCSS {
+        bootstrap = https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/{$bootstrapVersion}/css/bootstrap.min.css
+        bootstrap.external = 1
+    }
+
+    includeJSFooterlibs {
+        jquery = https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js
+        jquery.external = 1
+
+        popperjs = https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.min.js
+        popperjs.external = 1
+
+        bootstrap = https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/{$bootstrapVersion}/js/bootstrap.min.js
+        bootstrap.external = 1
+    }
+
+    10 = FLUIDTEMPLATE
+    10 {
+        templateName = TEXT
+        templateName.cObject = CASE
+        templateName.cObject {
+            key.data = pagelayout
+
+            pagets__Index = TEXT
+            pagets__Index.value = Index
+
+            pagets__SubPage3366 = TEXT
+            pagets__SubPage3366.value = SubPage3366
+
+            pagets__SubPage6633 = TEXT
+            pagets__SubPage6633.value = SubPage6633
+
+            pagets__SubPage5050 = TEXT
+            pagets__SubPage5050.value = SubPage5050
+
+            pagets__SubPage100 = TEXT
+            pagets__SubPage100.value = SubPage100
+
+            default < .pagets__SubPage100
+        }
+
+        templateRootPaths < plugin.tx_<%= extensionKeyCondensed %>.view.templateRootPaths
+        partialRootPaths < plugin.tx_<%= extensionKeyCondensed %>.view.partialRootPaths
+        layoutRootPaths < plugin.tx_<%= extensionKeyCondensed %>.view.layoutRootPaths
+    }
+}
+
+# Load Navigation
+<INCLUDE_TYPOSCRIPT: source="DIR:EXT:<%= extensionKey %>/Configuration/TypoScript/Page/Navigation">

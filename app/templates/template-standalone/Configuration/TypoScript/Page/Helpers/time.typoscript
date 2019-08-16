@@ -1,0 +1,4 @@
+lib {
+    currentYear = TEXT
+    currentYear.data = date:Y
+}

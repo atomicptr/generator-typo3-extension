@@ -1,0 +1,10 @@
+config.additionalHeaders {
+    #### SECURITY HEADERS ####
+    10.header = X-XSS-Protection: 1; mode=block
+    20.header = X-Frame-Options: SAMEORIGIN
+    30.header = X-Content-Type-Options: nosniff
+    40.header = Content-Security-Policy: default-src https: 'unsafe-inline'
+    50.header = Referrer-Policy: no-referrer-when-downgrade
+    60.header = Feature-Policy: accelerometer 'none'; camera 'none'; geolocation 'none'; gyroscope 'none';
+    60.header := appendString(magnetometer 'none'; microphone 'none'; payment 'none'; usb 'none')
+}

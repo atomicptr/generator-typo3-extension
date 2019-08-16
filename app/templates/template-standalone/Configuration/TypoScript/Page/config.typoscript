@@ -1,0 +1,18 @@
+# production settings
+config {
+    no_cache = 0
+    contentObjectExceptionHandler = 1
+
+    # activate compression
+    compressJs = 1
+    concatenateJs = 1
+    compressCss = 1
+    concatenateCss = 1
+
+    sendCacheHeaders = 1
+
+    # disable admin panel
+    admPanel = 0
+}
+
+<INCLUDE_TYPOSCRIPT: source="DIR:EXT:<%= extensionKey %>/Configuration/TypoScript/Page/Config">

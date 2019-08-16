@@ -1,0 +1,53 @@
+lib.navigation = HMENU
+lib.navigation {
+    special = directory
+    special.value = {$plugin.tx_<%= extensionKeyCondensed %>.settings.navigation_directory}
+
+    wrap = <ul class="navbar-nav mr-auto">|</ul>
+
+    1 = TMENU
+    1 {
+        expAll = 1
+
+        NO = 1
+        NO {
+            ATagParams = class="nav-link"
+            wrapItemAndSub = <li class="nav-item">|</li>
+        }
+
+        ACT = 1
+        ACT < .NO
+        ACT {
+            wrapItemAndSub = <li class="nav-item active">|</li>
+        }
+
+        IFSUB = 1
+        IFSUB < .NO
+        IFSUB {
+            ATagParams = class="nav-link dropdown-toggle" role="button" data-toggle="dropdown"
+            wrapItemAndSub = <li class="nav-item dropdown">|</li>
+        }
+
+        ACTIFSUB = 1
+        ACTIFSUB < .IFSUB
+        ACTIFSUB {
+            wrapItemAndSub = <li class="nav-item dropdown active">|</li>
+        }
+    }
+
+    2 = TMENU
+    2 {
+        wrap = <div class="dropdown-menu">|</div>
+
+        NO = 1
+        NO {
+            ATagParams = class="dropdown-item"
+        }
+
+        ACT = 1
+        ACT < .NO
+        ACT {
+            ATagParams = class="dropdown-item active"
+        }
+    }
+}

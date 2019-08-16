@@ -1,0 +1,2 @@
+<INCLUDE_TYPOSCRIPT: source="DIR:EXT:<%= extensionKey %>/Configuration/TSconfig/Page">
+<INCLUDE_TYPOSCRIPT: source="DIR:EXT:<%= extensionKey %>/Configuration/TSconfig/Extension">

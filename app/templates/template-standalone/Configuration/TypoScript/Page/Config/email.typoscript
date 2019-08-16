@@ -1,0 +1,4 @@
+config {
+    spamProtectEmailAddresses = 1
+    spamProtectEmailAddresses_atSubst = (at)
+}
