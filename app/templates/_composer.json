@@ -1,0 +1,32 @@
+{
+    "name": "<%= composerVendorName %>/<%= composerExtensionKey %>",
+    "type": "typo3-cms-extension",
+    "authors": [
+        {
+            "name": "<%= authorName %>",
+            "email": "<%= authorEmail %>"
+        }
+    ],
+    "require": {
+        "php": ">=7.2.0",
+        "typo3/cms-core": "^9.5"
+    },
+    "require-dev": {
+        "helmich/typo3-typoscript-lint": "^2",
+        "nimut/testing-framework": "^4"
+    },
+    "autoload": {
+        "psr-4": {
+            "<%= phpVendorName %>\\<%= phpExtensionName %>\\": "Classes"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "<%= phpVendorName %>\\<%= phpExtensionName %>\\Tests\\": "Tests"
+        }
+    },
+    "scripts": {
+        "test": "phpunit -c vendor/nimut/testing-framework/res/Configuration/UnitTests.xml --coverage-text --whitelist Classes Tests/Unit",
+        "typoscript-lint": "typoscript-lint"
+    }
+}

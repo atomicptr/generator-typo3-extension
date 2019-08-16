@@ -1,0 +1,19 @@
+plugin.tx_<%= extensionKeyCondensed %> {
+    # customsubcategory=view=View
+    view {
+        # cat=<%= extensionName %>/view; type=string; label=Path to templates
+        templateRootPath =
+
+        # cat=<%= extensionName %>/view; type=string; label=Path to template partials
+        partialRootPath =
+
+        # cat=<%= extensionName %>/view; type=string; label=Path to template layouts
+        layoutRootPath =
+    }
+
+    # customsubcategory=settings=Settngs
+    settings {
+        # cat=<%= extensionName %>/settings; type=int+; label=Storage Page ID
+        storagePid =
+    }
+}

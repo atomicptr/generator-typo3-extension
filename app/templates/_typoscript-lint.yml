@@ -1,0 +1,12 @@
+
+paths:
+  - Configuration/TypoScript
+  - Configuration/TSconfig
+filePatterns:
+  - "*.typoscript"
+  - "*.tsconfig"
+sniffs:
+  - class: RepeatingRValue
+    disabled: true
+  - class: NestingConsistency
+    disabled: true
